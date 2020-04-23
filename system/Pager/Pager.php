@@ -356,7 +356,7 @@ class Pager implements PagerInterface
 
 		if ($this->only)
 		{
-			$query = array_intersect_key($_GET, array_flip($this->only));
+			$query = array_intersect_key($_REQUEST, array_flip($this->only));
 
 			if (! $segment)
 			{
@@ -517,9 +517,9 @@ class Pager implements PagerInterface
 
 		$this->calculateCurrentPage($group);
 
-		if ($_GET)
+		if ($_REQUEST)
 		{
-			$this->groups[$group]['uri'] = $this->groups[$group]['uri']->setQueryArray($_GET);
+			$this->groups[$group]['uri'] = $this->groups[$group]['uri']->setQueryArray($_REQUEST);
 		}
 	}
 
@@ -547,7 +547,7 @@ class Pager implements PagerInterface
 		{
 			$pageSelector = $this->groups[$group]['pageSelector'];
 
-			$page = (int) ($_GET[$pageSelector] ?? 1);
+			$page = (int) ($_REQUEST[$pageSelector] ?? 1);
 
 			$this->groups[$group]['currentPage'] = $page < 1 ? 1 : $page;
 		}
